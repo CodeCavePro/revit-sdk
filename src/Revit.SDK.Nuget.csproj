@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Autodesk.Revit.SDK</PackageId>
+    <Version>$(Version)</Version>
+    <Authors>Zhmayev Yaroslav</Authors>
+    <Company>CodeCave LLC</Company>
+    <PackageTags>revit sdk api autodesk revitapi revitsdk $(RevitVersion)</PackageTags>
+    <Description>The Software Development Toolkit (SDK) provides extensive .NET code samples and documentation to help you get started developing with the Revit API.</Description>
+    <Copyright>© Autodesk Inc. All rights reserved</Copyright>
+    <PackageIconUrl>https://raw.githubusercontent.com/CodeCavePro/RevitSDK/master/assets/Revit-2014.png</PackageIconUrl>
+    <PackageProjectUrl>https://www.autodesk.com/developer-network/platform-technologies/revit</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CodeCavePro/RevitSDK</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DebugType>none</DebugType>
+    <OutputPath>..\dist\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="../lib/$(RevitVersion)/*" Pack="true" PackagePath="lib\$(TargetPath)" />
+    <Content Include="../assets/LICENSE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <!--
+    Disable the normal compilation process
+  -->
+  <Target Name="CoreCompile" />
+  <PropertyGroup>
+    <BuildInParallel>false</BuildInParallel>
+    <SkipCopyBuildProduct>true</SkipCopyBuildProduct>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+</Project>
