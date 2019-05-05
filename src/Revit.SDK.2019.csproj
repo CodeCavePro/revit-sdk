@@ -1,7 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
+    <!--
+    https://knowledge.autodesk.com/support/revit-products/downloads/caas/downloads/content/autodesk-revit-2019-product-updates.html
+    -->
     <RevitVersion>2019</RevitVersion>
-    <Version>$(RevitVersion).2.0</Version>
+    <Version>$(RevitVersion).2.1</Version>
     <TargetPath>net47</TargetPath>
   </PropertyGroup>
 

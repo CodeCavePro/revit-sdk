@@ -1,7 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
+    <!--
+    https://knowledge.autodesk.com/support/revit-products/downloads/caas/downloads/content/autodesk-revit-2017-product-updates.html
+    -->
     <RevitVersion>2017</RevitVersion>
-    <Version>$(RevitVersion).0.0</Version>
+    <Version>$(RevitVersion).1.1</Version>
     <TargetPath>net45</TargetPath>
   </PropertyGroup>
 
