@@ -1,0 +1,119 @@
+PLEASE READ CAREFULLY:
+
+AUTODESK, INC. ("AUTODESK") LICENSES THIS SOFTWARE TO YOU ONLY UPON THE
+CONDITION THAT YOU ACCEPT ALL OF THE TERMS CONTAINED IN THIS SOFTWARE LICENSE
+AGREEMENT ("AGREEMENT").
+
+BY SELECTING THE "I ACCEPT" BUTTON BELOW THIS AGREEMENT OR BY COPYING,
+INSTALLING, UPLOADING, ACCESSING, OR USING ALL OR ANY PORTION OF THE SOFTWARE
+YOU AGREE TO BE LEGALLY BOUND BY THIS AGREEMENT. A CONTRACT IS THEN FORMED
+BETWEEN AUTODESK AND EITHER YOU PERSONALLY, IF YOU ACQUIRE THE SOFTWARE FOR
+YOURSELF, OR THE COMPANY OR OTHER LEGAL ENTITY FOR WHICH YOU ARE ACQUIRING THE
+SOFTWARE.
+
+IF YOU DO NOT AGREE OR DO NOT WISH TO BIND YOURSELF OR THE ENTITY YOU REPRESENT:
+(A) DO NOT COPY, INSTALL, UPLOAD, ACCESS, OR USE THE SOFTWARE; (B) SELECT THE "I
+REJECT" BUTTON BELOW THIS AGREEMENT (WHICH WILL CANCEL THE LOADING OF THE
+SOFTWARE); AND (C) WITHIN THIRTY (30) DAYS FROM THE DATE OF ACQUISITION, RETURN
+THE SOFTWARE TO THE LOCATION WHERE YOU ACQUIRED IT FOR A REFUND, IF APPLICABLE.
+
+COPYING, INSTALLATION, UPLOADING, ACCESS, OR USE OF THIS SOFTWARE OR ANY
+ACCOMPANYING DOCUMENTATION OR MATERIALS EXCEPT AS PERMITTED BY THIS AGREEMENT IS
+UNAUTHORIZED AND CONSTITUTES A MATERIAL BREACH OF THIS AGREEMENT AND AN
+INFRINGEMENT OF THE COPYRIGHT AND OTHER INTELLECTUAL PROPERTY RIGHTS IN SUCH
+SOFTWARE AND DOCUMENTATION. IF YOU COPY, INSTALL, UPLOAD, ACCESS, OR USE ALL OR
+ANY PORTION OF THIS SOFTWARE OR ITS USER DOCUMENTATION WITHOUT ENTERING INTO
+THIS AGREEMENT OR OTHERWISE OBTAINING WRITTEN PERMISSION OF AUTODESK, YOU ARE
+VIOLATING COPYRIGHT AND OTHER INTELLECTUAL PROPERTY LAW. YOU MAY BE LIABLE TO
+AUTODESK AND ITS LICENSORS FOR DAMAGES, AND YOU MAY BE SUBJECT TO CRIMINAL
+PENALTIES.
+
+This Agreement accompanies the Autodesk® Revit API product and related
+explanatory materials ("Software"). The term "Software" shall also include any
+upgrades, modified versions, or updates of the Software licensed to you by
+Autodesk.
+
+1. Use of the Software
+
+You may install the Software in a single location on a single hard disk or other
+storage device; install and use the Software on a file server for use on a
+network for the purpose of installation onto hard disks or other storage devices
+or use the Software over such network; and make backup copies of the Software.
+You may not use the Software for competitive analysis purposes. You may make
+unlimited copies of the Software and give copies to other persons or entities so
+long as (i) all such copies are used to develop applications for Autodesk
+products based on the Revit platform and (ii) all such copies contain this
+Agreement and the same copyright and other proprietary notices that appear on or
+in the Software.
+
+You may also (a) modify and make unlimited copies of the source code examples
+contained in the Software ("Source Examples") and any resulting binary files for
+the exclusive purpose of incorporation into Your own works (the "User Works");
+and You may also (b) use the User Works subject to the following restrictions:
+(1) You must clearly identify any modified Source Examples and any resulting
+binary files as User Works developed by You, and not by Autodesk, and You must
+use class identifications for any classes of objects You create that are
+different and clearly distinguishable from the class identifications used by
+Autodesk; (2) You may distribute the resulting binary files of the Source
+Examples in User Works that are commercially distributed software applications
+only if: (i) such applications require a Revit platform product to operate; and
+(ii) such applications contain, subject to Autodesk's sole discretion,
+significant features and functionality in addition to the Source Examples so
+that the Source Examples are not the primary source of value. In any copy of the
+Source Examples, derivative works, and resulting binary files, You must include
+the copyright notices of Autodesk, Inc. as well as the following statement:
+"This software contains copyrighted code owned by Autodesk but has been modified
+and is not endorsed by Autodesk in its modified form".
+
+2. Copyright
+
+The Software is owned by Autodesk and its suppliers, and its structure,
+organization and code are the valuable trade secrets of Autodesk and its
+suppliers. The Software is also protected by copyright law and international
+treaty provisions. You agree not to modify, adapt, translate, reverse engineer,
+decompile, disassemble, or otherwise attempt to discover the source code of the
+Software except as expressly provided for in this Agreement. You may use
+trademarks only to identify printed output produced by the Software, in
+accordance with accepted trademark practice, including identification of
+trademark owner's name. Such use of any trademark does not give you any rights
+of ownership in that trademark. Except as stated above, this Agreement does not
+grant you any intellectual property rights in the Software.
+
+3. NO WARRANTY AND LIMITATION OF LIABILITY
+
+The Software is provided to you "AS IS," and you acknowledge that it may contain
+errors. Autodesk disclaims any warranty or liability obligations to you of any
+kind.
+
+AUTODESK AND ITS SUPPLIERS DO NOT AND CANNOT WARRANT THE PERFORMANCE OR RESULTS
+YOU MAY OBTAIN BY USING THE SOFTWARE. AUTODESK AND ITS SUPPLIERS MAKE NO
+WARRANTIES, EXPRESS OR IMPLIED, AS TO NONINFRINGEMENT OF THIRD PARTY RIGHTS,
+MERCHANTABILITY, OR FITNESS FOR ANY PARTICULAR PURPOSE. IN NO EVENT WILL
+AUTODESK OR ITS SUPPLIERS BE LIABLE TO YOU FOR ANY CONSEQUENTIAL, INCIDENTAL OR
+SPECIAL DAMAGES, INCLUDING ANY LOST PROFITS OR LOST SAVINGS, EVEN IF AN AUTODESK
+REPRESENTATIVE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, OR FOR ANY
+CLAIM BY ANY THIRD PARTY.
+
+Some states or jurisdictions do not allow the exclusion or limitation of
+incidental, consequential, or special damages, or the exclusion of implied
+warranties or limitations on how long an implied warranty may last, so the above
+limitations may not apply to you.
+
+4. Governing Law and General Provisions
+
+This Agreement will be governed by the laws of the State of California, U.S.A.,
+excluding the application of its conflicts of law rules. This Agreement will not
+be governed by the United Nations Convention on Contracts for the International
+Sale of Goods, the application of which is expressly excluded. If any part of
+this Agreement is found void and unenforceable, it will not affect the validity
+of the balance of the Agreement, which shall remain valid and enforceable
+according to its terms. You agree that the Software will not be shipped,
+transferred or exported into any country or used in any manner prohibited by the
+United States Export Administration Act or any other export laws, restrictions
+or regulations. This Agreement shall automatically terminate upon failure by you
+to comply with its terms.
+
+5. Notice to Government End Users
+
+All Autodesk Software provided to the U.S. Government are provided with the same
+commercial license rights and restrictions described elsewhere herein.
