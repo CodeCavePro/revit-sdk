@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
     <RevitVersion>2020</RevitVersion>
-    <Version>$(RevitVersion).0.0</Version>
+    <Version>$(RevitVersion).1.0</Version>
     <TargetPath>net471</TargetPath>
   </PropertyGroup>
 

@@ -68,6 +68,146 @@
    2014
 </since>
         </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ImporterIFC.SetFile(Autodesk.Revit.DB.IFC.IFCFile)">
+            <summary>
+   Sets the handle to the IFC file being created during this import operation.
+</summary>
+            <param name="file">
+   The handle to the file.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ImporterIFC.ProcessIFCProject(Autodesk.Revit.DB.IFC.IFCAnyHandle,System.Collections.Generic.IDictionary`2{Autodesk.Revit.DB.IFC.IFCAnyHandle,Autodesk.Revit.DB.ElementId})">
+            <summary>
+   The entry point to the native IFC import function.  Processes the main IfcProject and creates appropriate Revit elements.
+</summary>
+            <remarks>
+   This function allows for a "hybrid" .NET/native import.  For any handle below, there will be no native processing,
+   and it will be assumed that the element created in .NET is valid and appropriate.  Note that this is only applicable
+   for IFCAnyHandles that are subtypes of IfcProduct and IfcBuildingElementStorey; other handles will be ignored.
+   Also, note that some elements have interdependencies that are not yet handled by this function.  These include:
+   1. IfcDoor/IfcWindow and their IfcOpeningElements and 2D representations should both be created in the same environment (.NET or native).
+   2. Symbols and their instances should both be created in the same environment (.NET or native).
+</remarks>
+            <param name="ifcProject">
+   The IfcProject containing the entities in the IFC file.
+</param>
+            <param name="createdElements">
+   The element ids for the already created elements.  These handles will not be processed in native code.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2015
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ImporterIFC.ProcessIFCProject(Autodesk.Revit.DB.IFC.IFCAnyHandle)">
+            <summary>
+   The entry point to the native IFC import function.  Processes the main IfcProject and creates appropriate Revit elements.
+</summary>
+            <param name="ifcProject">
+   The IfcProject containing the entities in the IFC file.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ImporterIFC.GetOptions">
+            <summary>
+   Gets the collection of named options set by the importer client.
+</summary>
+            <returns>
+   The collection of named options.
+</returns>
+            <since>
+   2015
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ImporterIFC.IsValidObject">
+            <summary>
+   Specifies whether the .NET object represents a valid Revit entity.
+</summary>
+            <remarks>
+   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
+   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
+</remarks>
+            <returns>
+   True if the API object holds a valid Revit native object, false otherwise.
+</returns>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ImporterIFC.Document">
+            <summary>
+   Gets the document associated with the import.
+</summary>
+            <since>
+   2015
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ImporterIFC.FullFileName">
+            <summary>
+   The full file name of the IFC file to be import.
+</summary>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.ImporterIFC">
+            <summary>
+   The main class provided by Revit to allow implementation of IFC import.
+</summary>
+            <remarks>
+   An instance of this class is provided to clients which implement IImporterIFC
+   in order to provide an implementation for IFC import.  It contains information
+   on the options selected by the user for the import operation, as well as
+   members used to access specific types of data needed to implement the import
+   properly.
+</remarks>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IIFCImporterServerProxy.ImportIFC(Autodesk.Revit.DB.IFC.ImporterIFC)">
+            <summary>
+   The method that Revit will invoke to perform an import from IFC.
+</summary>
+            <param name="importer">
+   The IFC importer.
+</param>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IIFCImporterServer.ImportIFC(Autodesk.Revit.DB.IFC.ImporterIFC)">
+            <summary>
+   The method that Revit will invoke to perform an import from IFC.
+</summary>
+            <param name="importer">
+   The IFC importer.
+</param>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IIFCImporterServer">
+            <summary>
+   Interface for external servers implementing IFC import.
+</summary>
+            <since>
+   2014
+</since>
+        </member>
         <member name="M:Autodesk.Revit.DB.IFC.IFCGeometryInfo.GetRepresentations">
             <summary>
    Gets the representation handles created representing the processed geometry and stored in this object.
@@ -2414,1527 +2554,6 @@
             <since>
    2013
 </since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ImporterIFC.SetFile(Autodesk.Revit.DB.IFC.IFCFile)">
-            <summary>
-   Sets the handle to the IFC file being created during this import operation.
-</summary>
-            <param name="file">
-   The handle to the file.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ImporterIFC.ProcessIFCProject(Autodesk.Revit.DB.IFC.IFCAnyHandle,System.Collections.Generic.IDictionary`2{Autodesk.Revit.DB.IFC.IFCAnyHandle,Autodesk.Revit.DB.ElementId})">
-            <summary>
-   The entry point to the native IFC import function.  Processes the main IfcProject and creates appropriate Revit elements.
-</summary>
-            <remarks>
-   This function allows for a "hybrid" .NET/native import.  For any handle below, there will be no native processing,
-   and it will be assumed that the element created in .NET is valid and appropriate.  Note that this is only applicable
-   for IFCAnyHandles that are subtypes of IfcProduct and IfcBuildingElementStorey; other handles will be ignored.
-   Also, note that some elements have interdependencies that are not yet handled by this function.  These include:
-   1. IfcDoor/IfcWindow and their IfcOpeningElements and 2D representations should both be created in the same environment (.NET or native).
-   2. Symbols and their instances should both be created in the same environment (.NET or native).
-</remarks>
-            <param name="ifcProject">
-   The IfcProject containing the entities in the IFC file.
-</param>
-            <param name="createdElements">
-   The element ids for the already created elements.  These handles will not be processed in native code.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2015
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ImporterIFC.ProcessIFCProject(Autodesk.Revit.DB.IFC.IFCAnyHandle)">
-            <summary>
-   The entry point to the native IFC import function.  Processes the main IfcProject and creates appropriate Revit elements.
-</summary>
-            <param name="ifcProject">
-   The IfcProject containing the entities in the IFC file.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ImporterIFC.GetOptions">
-            <summary>
-   Gets the collection of named options set by the importer client.
-</summary>
-            <returns>
-   The collection of named options.
-</returns>
-            <since>
-   2015
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ImporterIFC.IsValidObject">
-            <summary>
-   Specifies whether the .NET object represents a valid Revit entity.
-</summary>
-            <remarks>
-   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
-   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
-</remarks>
-            <returns>
-   True if the API object holds a valid Revit native object, false otherwise.
-</returns>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ImporterIFC.Document">
-            <summary>
-   Gets the document associated with the import.
-</summary>
-            <since>
-   2015
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ImporterIFC.FullFileName">
-            <summary>
-   The full file name of the IFC file to be import.
-</summary>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.ImporterIFC">
-            <summary>
-   The main class provided by Revit to allow implementation of IFC import.
-</summary>
-            <remarks>
-   An instance of this class is provided to clients which implement IImporterIFC
-   in order to provide an implementation for IFC import.  It contains information
-   on the options selected by the user for the import operation, as well as
-   members used to access specific types of data needed to implement the import
-   properly.
-</remarks>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IIFCImporterServerProxy.ImportIFC(Autodesk.Revit.DB.IFC.ImporterIFC)">
-            <summary>
-   The method that Revit will invoke to perform an import from IFC.
-</summary>
-            <param name="importer">
-   The IFC importer.
-</param>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IIFCImporterServer.ImportIFC(Autodesk.Revit.DB.IFC.ImporterIFC)">
-            <summary>
-   The method that Revit will invoke to perform an import from IFC.
-</summary>
-            <param name="importer">
-   The IFC importer.
-</param>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IIFCImporterServer">
-            <summary>
-   Interface for external servers implementing IFC import.
-</summary>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IExporterIFCProxy.ExportIFC(Autodesk.Revit.DB.Document,Autodesk.Revit.DB.IFC.ExporterIFC,Autodesk.Revit.DB.View)">
-            <summary>
-   The method that Revit will invoke to perform an export to IFC.
-</summary>
-            <remarks>
-   There will be a transaction group opened for the document.  Any changes made to the document
-   must be temporary, as the transaction group will automatically be rolled back at the end.
-</remarks>
-            <param name="document">
-   The document to export.
-</param>
-            <param name="exporter">
-   The IFC exporter object.
-</param>
-            <param name="filterView">
-   The view whose filter visibility settings govern the export.
-</param>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IExporterIFC.ExportIFC(Autodesk.Revit.DB.Document,Autodesk.Revit.DB.IFC.ExporterIFC,Autodesk.Revit.DB.View)">
-            <summary>
-   The method that Revit will invoke to perform an export to IFC.
-</summary>
-            <remarks>
-   There will be a transaction group opened for the document.  Any changes made to the document
-   must be temporary, as the transaction group will automatically be rolled back at the end.
-</remarks>
-            <param name="document">
-   The document to export.
-</param>
-            <param name="exporter">
-   The IFC exporter object.
-</param>
-            <param name="filterView">
-   The view whose filter visibility settings govern the export.
-</param>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IExporterIFC">
-            <summary>
-   The interface used to implement a custom IFC exporter.
-</summary>
-            <remarks>
-   Implement this interface and register an instance of the derived class with ExporterIFCRegistry.
-</remarks>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetOrCreateFillPattern(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.Color,System.Double)">
-            <summary>
-   Get (or create) the IfcFillPatternStyle associated with an ElementId.
-</summary>
-            <param name="fillPatternId">
-   The fill pattern id.
-</param>
-            <param name="color">
-   The pattern color.
-</param>
-            <param name="planScale">
-   The view scale.
-</param>
-            <returns>
-   The IfcSurfaceStyle.
-</returns>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetRelatedElements">
-            <summary>
-   Gets all elements not associated to stories.
-</summary>
-            <returns>
-   The collection of elements.
-</returns>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetRelatedProducts">
-            <summary>
-   Gets all products not associated to stories.
-</summary>
-            <returns>
-   The collection of products.
-</returns>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RemoveBuildingStorey(Autodesk.Revit.DB.ElementId)">
-            <summary>
-   Removes an IFCLevelInfo corresponding to a level from the exporter's internal cache.
-</summary>
-            <param name="id">
-   The level id.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.AddBuildingStorey(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.IFC.IFCLevelInfo)">
-            <summary>
-   Adds building storey to the exporter's internal cache.
-</summary>
-            <param name="id">
-   The level id.
-</param>
-            <param name="levelInfo">
-   The IFCLevelInfo object.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.SetMaterialIdForCurrentExportState(Autodesk.Revit.DB.ElementId)">
-            <summary>
-   This sets the material id that is to be associated with the element in the current export state.
-</summary>
-            <remarks>
-   Even though there could be several materials associated with the element (set during PushExportState()),
-   unless the element has support for IfcMaterialLayerSet, IFC output will include only this one.
-</remarks>
-            <param name="elementId">
-   The material id.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetMaterialIdForCurrentExportState">
-            <summary>
-   This gets the material id that is associated with the element in the current export state.
-</summary>
-            <remarks>
-   Even though there could be several materials associated with the element (set during PushExportState()),
-   unless the element has support for IfcMaterialLayerSet, IFC output will include only this one.
-</remarks>
-            <returns>
-   The material id.
-</returns>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetFamilyName">
-            <summary>
-   Gets the name of the element assigned to the current export state.
-</summary>
-            <remarks>
-   The family name is prepared for use in IFC output during the call to PushExportState().
-</remarks>
-            <returns>
-   The family name.
-</returns>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.PopExportState">
-            <summary>
-   Resets the internal state of the exporter to process the previously active input element (if any), or
-   the default state if the stack is empty.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.PushExportState(Autodesk.Revit.DB.Element,Autodesk.Revit.DB.GeometryElement)">
-            <summary>
-   Sets the internal state of the exporter to process the geometry and properties of the input element.
-</summary>
-            <remarks>
-   The element will be assigned until PopExportState() is called.
-</remarks>
-            <param name="Elem">
-   The element.
-</param>
-            <param name="GRep">
-   The geometry of the element.  Optional, can be <see langword="null" />.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RegisterShapeForPresentationLayer(Autodesk.Revit.DB.Element,Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.IFC.IFCAnyHandle)">
-            <summary>
-   Sets an IfcShapeRepresentation to be used for the IfcPresentationLayerAssignment associated with
-   the given Revit category and element.
-</summary>
-            <param name="pElement">
-   The element.
-</param>
-            <param name="categoryId">
-   The category id.
-</param>
-            <param name="newShapeRepresentation">
-   The IfcShapeRepresentation handle.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetDoorWindowOpeningHandle(Autodesk.Revit.DB.ElementId)">
-            <summary>
-   Get the handle to the opening associated with a hosted (door/window) element from the internal cache.
-</summary>
-            <param name="familyInstanceId">
-   The id of the door or window.
-</param>
-            <returns>
-   The opening handle.
-</returns>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RegisterDoorWindowForUncreatedOpening(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.IFC.IFCAnyHandle)">
-            <summary>
-   Registers a door or window in the ExporterIFC's internal cache.  The ids registered correspond to
-   openings in walls which have not been processed and created yet.
-</summary>
-            <param name="familyInstanceId">
-   The id of the door or window.
-</param>
-            <param name="instanceHandle">
-   The handle to the IfcDoor or IfcWindow created for this instance.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.Set3DContextHandle(Autodesk.Revit.DB.IFC.IFCAnyHandle,System.String)">
-            <summary>
-   Sets the IfcRepresentationContext or IfcRepresentationSubContext handle to be used for 3D entities (Model entities).
-</summary>
-            <param name="contextHandle">
-   The IfcRepresentationContext for 3D entities.
-</param>
-            <param name="subContextName">
-   The name of the IfcRepresentationSubContext, or the IfcRepresentationContext if the string is empty, for 3D entities.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.Get3DContextHandle(System.String)">
-            <summary>
-   Obtains the IfcRepresentationContext or IfcRepresentationSubContext handle to be used for 3D entities (Model entities).
-</summary>
-            <remarks>
-   The context handle automatically incorporates the angle to true north for the document.
-</remarks>
-            <param name="subContextName">
-   The name of the IfcRepresentationSubContext, or the IfcRepresentationContext if the string is empty, for 3D entities.
-</param>
-            <returns>
-   The IfcRepresentationContext for 3D entities.
-</returns>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.Set2DContextHandle(Autodesk.Revit.DB.IFC.IFCAnyHandle)">
-            <summary>
-   Sets the IfcRepresentationContext handle to be used for 2D entities (Annotations).
-</summary>
-            <param name="contextHandle">
-   The IfcRepresentationContext.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.Get2DContextHandle">
-            <summary>
-   Obtains the IfcRepresentationContext handle to be used for 2D entities (Annotations).
-</summary>
-            <remarks>
-   The context handle is automatically applied with a 1:100 scale.
-</remarks>
-            <returns>
-   The IfcRepresentationContext.
-</returns>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.ClearFaceWithElementHandleMap">
-            <summary>
-   Clear face with element handle map.
-</summary>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RegisterFaceWithElementHandle(Autodesk.Revit.DB.Face,Autodesk.Revit.DB.IFC.IFCAnyHandle)">
-            <summary>
-   Register face with element handle to make sure the openings created are related to the right element.
-</summary>
-            <param name="face">
-   The face.
-</param>
-            <param name="elemHandle">
-   The element handle.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetLevelInfos">
-            <summary>
-   Returns a collection containing the information about all levels in the document.
-</summary>
-            <remarks>
-   Level information is currently automatically collected and cached in the ExporterIFC
-   object.  This method returns the cached information which is often needed during export
-   of particular building elements which reference levels, as well as to implement automatic
-   wall and column splitting.
-</remarks>
-            <returns>
-   The collection of level information.
-</returns>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetLevelInfo(Autodesk.Revit.DB.ElementId)">
-            <summary>
-   Returns an object representing the information about a level in the document.
-</summary>
-            <remarks>
-   Level information is currently automatically collected and cached in the ExporterIFC
-   object.  This method returns the cached information for a given level,
-   which is often needed during export of particular building elements which reference levels, as well
-   as to implement automatic wall and column splitting.
-</remarks>
-            <param name="levelId">
-   The level id.
-</param>
-            <returns>
-   The level information.
-</returns>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetHostObjects">
-            <summary>
-   Returns a collection containing the host object handles in the document.
-</summary>
-            <remarks>
-   Host object handles is currently collected by RegisterSpaceBoundingElementHandle
-   and exporting internal element and cached in the ExporterIFC object.
-   This method returns the cached information which is needed to create wall connectivity objects.
-</remarks>
-            <returns>
-   The collection of host objects.
-</returns>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.FindSpaceBoundingElementHandle(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.ElementId)">
-            <summary>
-   Looks up the handle associated to the element and level id from the ExporterIFC's internal cache.
-</summary>
-            <param name="id">
-   The Revit element id to look for.
-</param>
-            <param name="levelId">
-   The element level id.
-</param>
-            <returns>
-   The handle associated to the element and level id.  If the id is not found in the cache, an empty handle
-   is returned (HasValue == false).
-</returns>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RegisterSpaceBoundingElementHandle(Autodesk.Revit.DB.IFC.IFCAnyHandle,Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.ElementId)">
-            <summary>
-   Stores a handle representing a space bounding element to the ExporterIFC's internal cache.
-</summary>
-            <remarks>
-   The cache of space bounding elements will be used during completion of export to create
-   relationship objects such as IfcRelSpaceBoundary and IfcRelConnectsPathElements.
-   The types of Revit elements accepted by this function are:
-   <list type="bullet"><item>Walls</item><item>Curtain walls</item><item>Roofs</item><item>Floors</item><item>Doors</item><item>Windows</item></list></remarks>
-            <param name="instanceHandle">
-   The handle to the space bounding element.
-</param>
-            <param name="id">
-   The Revit element id associated to this handle.
-</param>
-            <param name="levelId">
-   The level id assigned to the space bounding object.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetOptions">
-            <summary>
-   Gets the collection of named options set by the exporter client.
-</summary>
-            <returns>
-   The collection of named options.
-</returns>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.SetOwnerHistoryHandle(Autodesk.Revit.DB.IFC.IFCAnyHandle)">
-            <summary>
-   Sets the handle to the IfcOwnerHistory for the file.
-</summary>
-            <param name="ownerHistory">
-   The handle.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.SetFile(Autodesk.Revit.DB.IFC.IFCFile)">
-            <summary>
-   Sets the handle to the IFC file being created during this export operation.
-</summary>
-            <param name="file">
-   The handle to the file.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.PopTransform">
-            <summary>
-   Resets the internal transform of the exporter to process the previously active input element (if any), or
-   the default transform if the stack is empty.
-</summary>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.PushTransform(Autodesk.Revit.DB.Transform)">
-            <summary>
-   Sets the internal transform of the exporter to process the geometry and properties of the input element.
-</summary>
-            <param name="trf">
-   The transform.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetFile">
-            <summary>
-   Gets the handle to the IFC file being created during this export operation.
-</summary>
-            <returns>
-   The handle to the file.
-</returns>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.IsValidObject">
-            <summary>
-   Specifies whether the .NET object represents a valid Revit entity.
-</summary>
-            <remarks>
-   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
-   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
-</remarks>
-            <returns>
-   True if the API object holds a valid Revit native object, false otherwise.
-</returns>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.WallAndColumnSplitting">
-            <summary>
-   Identifies if division of multi-level walls and columns by levels should take place during this export.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.SpaceBoundaryLevel">
-            <summary>
-   Identifies the level of space boundaries being exported.
-</summary>
-            <remarks>
-   There are three valid values for this integer:
-   0 = export no space boundaries.  This can save space if the receiving application doesn't use them.
-   1 = export 1st level space boundaries.  This is the default.
-   2 = export 2nd level space boundaries.  This is primarily for use in energy analysis programs, and the GSA.
-</remarks>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.ExportBaseQuantities">
-            <summary>
-   Identifies if the export should include IFC standard quantities currently supported by Revit.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.FileVersion">
-            <summary>
-   Identifies the file version being exported.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.ExportAs2x3">
-            <summary>
-   Identifies if the file version being exported is 2x3.
-</summary>
-            <remarks>
-   Returns true even for alternative formats equivalent to 2x3, such as COBIE.
-</remarks>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.ExportAs2x2">
-            <summary>
-   Identifies if the file version being exported is 2x2.
-</summary>
-            <remarks>
-   Returns true even for alternative formats equivalent to 2x2, such as BCA.
-</remarks>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.FileName">
-            <summary>
-   The name of the IFC file being exported.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.ExporterIFC">
-            <summary>
-   The main class provided by Revit to allow implementation of IFC export.
-</summary>
-            <remarks>
-   An instance of this class is provided to clients which implement IExporterIFC
-   in order to provide an implementation for IFC export.  It contains information
-   on the options selected by the user for the export operation, as well as
-   members used to access specific types of data needed to implement the export
-   properly.
-</remarks>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCConnectedWallData.IsValidObject">
-            <summary>
-   Specifies whether the .NET object represents a valid Revit entity.
-</summary>
-            <remarks>
-   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
-   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
-</remarks>
-            <returns>
-   True if the API object holds a valid Revit native object, false otherwise.
-</returns>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCConnectedWallData.Location">
-            <summary>
-   The location for the join.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCConnectedWallData.ElementId">
-            <summary>
-   The element id to which this element is joined.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IFCConnectedWallData">
-            <summary>
-   A class that contains the IFC-specific information about how an element is joined to another element.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.GetLocalPlacement">
-            <summary>
-   Gets the local placement.
-</summary>
-            <returns>
-   The local placement.
-</returns>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.GetRelatedElements">
-            <summary>
-   Gets all building elements on this level.
-</summary>
-            <returns>
-   The collection of elements.
-</returns>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.GetRelatedProducts">
-            <summary>
-   Gets all building products on this level.
-</summary>
-            <returns>
-   The collection of products.
-</returns>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.GetBuildingStorey">
-            <summary>
-   Gets the IfcBuildingStorey handle.
-</summary>
-            <returns>
-   The handle.
-</returns>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.Create(Autodesk.Revit.DB.IFC.IFCAnyHandle,Autodesk.Revit.DB.IFC.IFCAnyHandle,System.Double,System.Double,System.Double,System.Boolean)">
-            <summary>
-   Creates an IFCLevelInfo.
-</summary>
-            <param name="buildingStorey">
-   The building storey handle (IfcBuildingStorey).
-</param>
-            <param name="localPlacement">
-   The local placement handle (IfcLocalPlacement).
-</param>
-            <param name="height">
-   The height of the level.
-</param>
-            <param name="elevation">
-   The elevation of the level.
-</param>
-            <param name="scaleFactor">
-   The scale factor.
-</param>
-            <param name="isPrimaryLevel">
-   True if this is primary level, false otherwise.
-</param>
-            <returns>
-   The IFCLevelInfo object.
-</returns>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCLevelInfo.IsValidObject">
-            <summary>
-   Specifies whether the .NET object represents a valid Revit entity.
-</summary>
-            <remarks>
-   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
-   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
-</remarks>
-            <returns>
-   True if the API object holds a valid Revit native object, false otherwise.
-</returns>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCLevelInfo.Elevation">
-            <summary>
-   The elevation of the level.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCLevelInfo.DistanceToNextLevel">
-            <summary>
-   The distance to the next story level.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IFCLevelInfo">
-            <summary>
-   Represents information about a particular level in the document.
-</summary>
-            <remarks>
-   Level information includes the height, which is the distance to from this level
-   to the next available level, and the actual elevation of the level, in the Revit default units.
-</remarks>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ClearOpenings">
-            <summary>
-   Removes all cached openings from the data.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.AddOpening(Autodesk.Revit.DB.IFC.IFCExtrusionData)">
-            <summary>
-   Adds an opening to the data.
-</summary>
-            <remarks>
-   The opening is stored for retrieval later via GetOpenings().
-</remarks>
-            <param name="data">
-   The opening.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.GetOpenings">
-            <summary>
-   Gets a collection of all of the openings stored in this data.
-</summary>
-            <remarks>
-   Contains all of the openings stored via AddOpening().
-</remarks>
-            <returns>
-   The opening information.
-</returns>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.GetLocalPlacement">
-            <summary>
-   Gets the reference to the IfcLocalPlacement handle used when creating the extrusion.
-</summary>
-            <returns>
-   The IfcLocalPlacement handle.
-</returns>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.SetLocalPlacement(Autodesk.Revit.DB.IFC.IFCAnyHandle)">
-            <summary>
-   Sets the data to reference an IfcLocalPlacement handle when creating the extrusion.
-   Side effect: will set ReuseLocalPlacement to true.
-</summary>
-            <param name="localPlacement">
-   The IfcLocalPlacement handle.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.IsValidObject">
-            <summary>
-   Specifies whether the .NET object represents a valid Revit entity.
-</summary>
-            <remarks>
-   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
-   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
-</remarks>
-            <returns>
-   True if the API object holds a valid Revit native object, false otherwise.
-</returns>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.AreInnerRegionsOpenings">
-            <summary>
-   True if inner regions of the extrusion should become openings, false otherwise.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ExtrusionDirection">
-            <summary>
-   The extrusion direction to generate an extrusion.
-</summary>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   When setting this property: A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.CustomAxis">
-            <summary>
-   The custom extrusion axis to try when generating an extrusion.
-</summary>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   When setting this property: A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.HasExtrusionDirection">
-            <summary>
-   Identifies if the data contains a extrusion direction.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.HasCustomAxis">
-            <summary>
-   Identifies if the data contains a custom extrusion axis.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.PossibleExtrusionAxes">
-            <summary>
-   The axes to try when generating the properties of the extrusion.
-</summary>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentOutOfRangeException">
-   When setting this property: A value passed for an enumeration argument is not a member of that enumeration
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ReuseLocalPlacement">
-            <summary>
-   Allows re-use of local placement when creating a new local placement
-   due to shifting of breps when moving towards the origin.
-</summary>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.AllowVerticalOffsetOfBReps">
-            <summary>
-   Allows vertical shifting of breps when moving towards the origin.
-</summary>
-            <since>
-   2013
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledOuterPerimeter">
-            <summary>
-   The outer perimeter of the extrusion, scaled to the units of export.
-</summary>
-            <value>
-   This value represents the perimeter of the outermost curve loop bounding the area of the extrusion.
-   Zero if the perimeter has never been set on this object.
-</value>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledInnerPerimeter">
-            <summary>
-   The inner perimeter of the extrusion, scaled to the units of export.
-</summary>
-            <value>
-   This value represents the perimeter of all of the inner curve loops within the area of the extrusion.
-   Zero if the perimeter has never been set on this object.
-</value>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledWidth">
-            <summary>
-   The width of the extrusion, scaled to the units of export.
-</summary>
-            <value>
-   Zero if the width has never been set on this object.
-</value>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.Slope">
-            <summary>
-   The slope of the extrusion, in degrees.
-</summary>
-            <value>
-   Zero if the slope has never been set on this object.
-</value>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledLength">
-            <summary>
-   The length of the extrusion, scaled to the units of export.
-</summary>
-            <value>
-   Zero if the length has never been set on this object.
-</value>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledHeight">
-            <summary>
-   The height of the extrusion, scaled to the units of export.
-</summary>
-            <value>
-   Zero if the height has never been set on this object.
-</value>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledArea">
-            <summary>
-   The area of the extrusion, scaled to the units of export.
-</summary>
-            <value>
-   The value will be 0.0 if the area has never been set on this object.
-</value>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ForceOffset">
-            <summary>
-   True to create new local placement with identity transform.
-</summary>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.#ctor">
-            <summary>
-   The default constructor.
-</summary>
-            <remarks>
-   All input data will be considered uninitialized.
-</remarks>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData">
-            <summary>
-   A utility object that is used to pass information related to extrusion creation.
-</summary>
-            <remarks>
-   This class accepts input used to attempt to create an extrusion (possibly with openings) from Revit geometry.
-   The output contains information about the created extrusion and its openings. The information set is used to
-   generate properties for the extruded body and related opening elements in the IFC file.
-</remarks>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorUtils.CalculateExtrusionData(Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions,System.Collections.Generic.IList`1{Autodesk.Revit.DB.Face})">
-            <summary>
-   Calculates the extrusion data from a collection of Revit geometry faces.
-</summary>
-            <param name="extrInfo">
-   The options for extrusion extraction.
-</param>
-            <param name="allInputFaces">
-   The collection of faces.
-</param>
-            <returns>
-   A collection of extrusion data calculated for the geometry.
-   If the function fails to calculate one or more valid extrusions,
-   this collection will be empty.
-</returns>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorUtils.CalculateExtrusionData(Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions,Autodesk.Revit.DB.GeometryObject)">
-            <summary>
-   Calculates the extrusion data from a Revit geometry object.
-</summary>
-            <param name="extrusionOptions">
-   The options for extrusion extraction.
-</param>
-            <param name="geometryObject">
-   The geometry object.
-</param>
-            <returns>
-   A collection of extrusion data calculated for the geometry.
-   If the function fails to calculate one or more valid extrusions,
-   this collection will be empty.
-</returns>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorUtils">
-            <summary>
-   A utility class used to calculate extrusion data from Revit geometry for IFC export.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.IsValidObject">
-            <summary>
-   Specifies whether the .NET object represents a valid Revit entity.
-</summary>
-            <remarks>
-   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
-   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
-</remarks>
-            <returns>
-   True if the API object holds a valid Revit native object, false otherwise.
-</returns>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.Scale">
-            <summary>
-   The scaling factor for length measurements from the default Revit units to the export units.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.CustomAxis">
-            <summary>
-   The custom axis to try (if extrusionAxes includes an option for a custom direction).
-</summary>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   When setting this property: A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.ExtrusionAxes">
-            <summary>
-   The extrusion axes to try when doing the calculation.
-</summary>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentOutOfRangeException">
-   When setting this property: A value passed for an enumeration argument is not a member of that enumeration
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.#ctor(Autodesk.Revit.DB.IFC.ExporterIFC,Autodesk.Revit.DB.IFC.IFCExtrusionAxes,Autodesk.Revit.DB.XYZ,System.Double)">
-            <summary>
-   Constructs a new instance of a class used to calculate extrusions from Revit geometry.
-</summary>
-            <param name="exporterIFC">
-   The exporter.
-</param>
-            <param name="extrusionAxes">
-   The extrusion axes to try when doing the calculation.
-</param>
-            <param name="customAxis">
-   The custom axis to try (if extrusionAxes includes an option for a custom direction).
-</param>
-            <param name="scale">
-   The scaling factor for length measurements from the default Revit units to the export units.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentOutOfRangeException">
-   A value passed for an enumeration argument is not a member of that enumeration
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions">
-            <summary>
-   This class contains the options used to calculate extrusions from Revit geometry.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.GetLoops">
-            <summary>
-   Gets the curve loops that form the base shape of the extrusion.
-</summary>
-            <returns>
-   The collection of loops.
-</returns>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.ClearLoops">
-            <summary>
-   Clears the curve loops stored in the extrusion data.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.RemoveLoopAt(System.Int32)">
-            <summary>
-   Removes the loop at the specified index.
-</summary>
-            <param name="index">
-   The zero-based index of the loop to remove.
-</param>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.AddLoop(Autodesk.Revit.DB.CurveLoop)">
-            <summary>
-   Adds a curve loop to the extrusion data.
-</summary>
-            <param name="pLoop">
-   The curve loop.
-</param>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.IsValid">
-            <summary>
-   Determines if the extrusion data represents a valid extrusion.
-</summary>
-            <returns>
-   True if the extrusion is valid, false otherwise.
-</returns>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionData.IsValidObject">
-            <summary>
-   Specifies whether the .NET object represents a valid Revit entity.
-</summary>
-            <remarks>
-   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
-   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
-</remarks>
-            <returns>
-   True if the API object holds a valid Revit native object, false otherwise.
-</returns>
-            <since>
-   2014
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionData.ExtrusionDirection">
-            <summary>
-   The direction used for the extrusion.
-</summary>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
-   When setting this property: A non-optional argument was NULL
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionData.ExtrusionBasis">
-            <summary>
-   The basis used for the extrusion.
-</summary>
-            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentOutOfRangeException">
-   When setting this property: A value passed for an enumeration argument is not a member of that enumeration
-</exception>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionData.ScaledExtrusionLength">
-            <summary>
-   The length of the extrusion, scaled in the units of the export.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.#ctor">
-            <summary>
-   Constructs a new empty extrusion data object.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionData">
-            <summary>
-   Represents the geometry of an extrusion (a solid body or opening) generated
-   from Revit geometry.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionBasis">
-            <summary>
-   This enumerated type represents the possible bases for derivation of extrusion geometry.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionBasis.BasisZ">
-            <summary>
-   The Z direction.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionBasis.BasisY">
-            <summary>
-   The Y direction.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionBasis.BasisX">
-            <summary>
-   The X direction.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionBasis.InvalidBasis">
-            <summary>
-   An invalid basis (typically indicating that the extrusion extraction was unsuccessful).
-</summary>
-        </member>
-        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionAxes">
-            <summary>
-   Represents the possible axes to try when generating an extrusion using IFCCreateExtrusionData.
-</summary>
-            <since>
-   2012
-</since>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryXYZAndCustom">
-            <summary>
-   The x-, y-, and z-axes, and a custom direction.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryCustom">
-            <summary>
-   A custom direction.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryXYZ">
-            <summary>
-   The x-, y-, and z-axes.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryYZ">
-            <summary>
-   The y- and z-axes.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryXZ">
-            <summary>
-   The x- and z-axes.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryZ">
-            <summary>
-   The z-axis.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryXY">
-            <summary>
-   The x- and y-axes.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryY">
-            <summary>
-   The y-axis.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryX">
-            <summary>
-   The x-axis.
-</summary>
-        </member>
-        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryDefault">
-            <summary>
-   The default value.
-</summary>
         </member>
         <member name="M:vecsAreParallelExact(XYZ!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced,XYZ!System.Runtime.CompilerServices.IsConst*!System.Runtime.CompilerServices.IsImplicitlyDereferenced)">
 Determines whether vectors are parallel within DOUBLE_EPS 
@@ -9796,6 +8415,1053 @@ Represents a basic transition.
 This class encapsulates IUIAnimationTransition interface and serves as a base class for all transitions.
 </remarks>
         </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IExporterIFCProxy.ExportIFC(Autodesk.Revit.DB.Document,Autodesk.Revit.DB.IFC.ExporterIFC,Autodesk.Revit.DB.View)">
+            <summary>
+   The method that Revit will invoke to perform an export to IFC.
+</summary>
+            <remarks>
+   There will be a transaction group opened for the document.  Any changes made to the document
+   must be temporary, as the transaction group will automatically be rolled back at the end.
+</remarks>
+            <param name="document">
+   The document to export.
+</param>
+            <param name="exporter">
+   The IFC exporter object.
+</param>
+            <param name="filterView">
+   The view whose filter visibility settings govern the export.
+</param>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IExporterIFC.ExportIFC(Autodesk.Revit.DB.Document,Autodesk.Revit.DB.IFC.ExporterIFC,Autodesk.Revit.DB.View)">
+            <summary>
+   The method that Revit will invoke to perform an export to IFC.
+</summary>
+            <remarks>
+   There will be a transaction group opened for the document.  Any changes made to the document
+   must be temporary, as the transaction group will automatically be rolled back at the end.
+</remarks>
+            <param name="document">
+   The document to export.
+</param>
+            <param name="exporter">
+   The IFC exporter object.
+</param>
+            <param name="filterView">
+   The view whose filter visibility settings govern the export.
+</param>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IExporterIFC">
+            <summary>
+   The interface used to implement a custom IFC exporter.
+</summary>
+            <remarks>
+   Implement this interface and register an instance of the derived class with ExporterIFCRegistry.
+</remarks>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetOrCreateFillPattern(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.Color,System.Double)">
+            <summary>
+   Get (or create) the IfcFillPatternStyle associated with an ElementId.
+</summary>
+            <param name="fillPatternId">
+   The fill pattern id.
+</param>
+            <param name="color">
+   The pattern color.
+</param>
+            <param name="planScale">
+   The view scale.
+</param>
+            <returns>
+   The IfcSurfaceStyle.
+</returns>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetRelatedElements">
+            <summary>
+   Gets all elements not associated to stories.
+</summary>
+            <returns>
+   The collection of elements.
+</returns>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetRelatedProducts">
+            <summary>
+   Gets all products not associated to stories.
+</summary>
+            <returns>
+   The collection of products.
+</returns>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RemoveBuildingStorey(Autodesk.Revit.DB.ElementId)">
+            <summary>
+   Removes an IFCLevelInfo corresponding to a level from the exporter's internal cache.
+</summary>
+            <param name="id">
+   The level id.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.AddBuildingStorey(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.IFC.IFCLevelInfo)">
+            <summary>
+   Adds building storey to the exporter's internal cache.
+</summary>
+            <param name="id">
+   The level id.
+</param>
+            <param name="levelInfo">
+   The IFCLevelInfo object.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.SetMaterialIdForCurrentExportState(Autodesk.Revit.DB.ElementId)">
+            <summary>
+   This sets the material id that is to be associated with the element in the current export state.
+</summary>
+            <remarks>
+   Even though there could be several materials associated with the element (set during PushExportState()),
+   unless the element has support for IfcMaterialLayerSet, IFC output will include only this one.
+</remarks>
+            <param name="elementId">
+   The material id.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetMaterialIdForCurrentExportState">
+            <summary>
+   This gets the material id that is associated with the element in the current export state.
+</summary>
+            <remarks>
+   Even though there could be several materials associated with the element (set during PushExportState()),
+   unless the element has support for IfcMaterialLayerSet, IFC output will include only this one.
+</remarks>
+            <returns>
+   The material id.
+</returns>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetFamilyName">
+            <summary>
+   Gets the name of the element assigned to the current export state.
+</summary>
+            <remarks>
+   The family name is prepared for use in IFC output during the call to PushExportState().
+</remarks>
+            <returns>
+   The family name.
+</returns>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.PopExportState">
+            <summary>
+   Resets the internal state of the exporter to process the previously active input element (if any), or
+   the default state if the stack is empty.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.PushExportState(Autodesk.Revit.DB.Element,Autodesk.Revit.DB.GeometryElement)">
+            <summary>
+   Sets the internal state of the exporter to process the geometry and properties of the input element.
+</summary>
+            <remarks>
+   The element will be assigned until PopExportState() is called.
+</remarks>
+            <param name="Elem">
+   The element.
+</param>
+            <param name="GRep">
+   The geometry of the element.  Optional, can be <see langword="null" />.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RegisterShapeForPresentationLayer(Autodesk.Revit.DB.Element,Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.IFC.IFCAnyHandle)">
+            <summary>
+   Sets an IfcShapeRepresentation to be used for the IfcPresentationLayerAssignment associated with
+   the given Revit category and element.
+</summary>
+            <param name="pElement">
+   The element.
+</param>
+            <param name="categoryId">
+   The category id.
+</param>
+            <param name="newShapeRepresentation">
+   The IfcShapeRepresentation handle.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetDoorWindowOpeningHandle(Autodesk.Revit.DB.ElementId)">
+            <summary>
+   Get the handle to the opening associated with a hosted (door/window) element from the internal cache.
+</summary>
+            <param name="familyInstanceId">
+   The id of the door or window.
+</param>
+            <returns>
+   The opening handle.
+</returns>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RegisterDoorWindowForUncreatedOpening(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.IFC.IFCAnyHandle)">
+            <summary>
+   Registers a door or window in the ExporterIFC's internal cache.  The ids registered correspond to
+   openings in walls which have not been processed and created yet.
+</summary>
+            <param name="familyInstanceId">
+   The id of the door or window.
+</param>
+            <param name="instanceHandle">
+   The handle to the IfcDoor or IfcWindow created for this instance.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.Set3DContextHandle(Autodesk.Revit.DB.IFC.IFCAnyHandle,System.String)">
+            <summary>
+   Sets the IfcRepresentationContext or IfcRepresentationSubContext handle to be used for 3D entities (Model entities).
+</summary>
+            <param name="contextHandle">
+   The IfcRepresentationContext for 3D entities.
+</param>
+            <param name="subContextName">
+   The name of the IfcRepresentationSubContext, or the IfcRepresentationContext if the string is empty, for 3D entities.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.Get3DContextHandle(System.String)">
+            <summary>
+   Obtains the IfcRepresentationContext or IfcRepresentationSubContext handle to be used for 3D entities (Model entities).
+</summary>
+            <remarks>
+   The context handle automatically incorporates the angle to true north for the document.
+</remarks>
+            <param name="subContextName">
+   The name of the IfcRepresentationSubContext, or the IfcRepresentationContext if the string is empty, for 3D entities.
+</param>
+            <returns>
+   The IfcRepresentationContext for 3D entities.
+</returns>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.Set2DContextHandle(Autodesk.Revit.DB.IFC.IFCAnyHandle)">
+            <summary>
+   Sets the IfcRepresentationContext handle to be used for 2D entities (Annotations).
+</summary>
+            <param name="contextHandle">
+   The IfcRepresentationContext.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.Get2DContextHandle">
+            <summary>
+   Obtains the IfcRepresentationContext handle to be used for 2D entities (Annotations).
+</summary>
+            <remarks>
+   The context handle is automatically applied with a 1:100 scale.
+</remarks>
+            <returns>
+   The IfcRepresentationContext.
+</returns>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.ClearFaceWithElementHandleMap">
+            <summary>
+   Clear face with element handle map.
+</summary>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RegisterFaceWithElementHandle(Autodesk.Revit.DB.Face,Autodesk.Revit.DB.IFC.IFCAnyHandle)">
+            <summary>
+   Register face with element handle to make sure the openings created are related to the right element.
+</summary>
+            <param name="face">
+   The face.
+</param>
+            <param name="elemHandle">
+   The element handle.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetLevelInfos">
+            <summary>
+   Returns a collection containing the information about all levels in the document.
+</summary>
+            <remarks>
+   Level information is currently automatically collected and cached in the ExporterIFC
+   object.  This method returns the cached information which is often needed during export
+   of particular building elements which reference levels, as well as to implement automatic
+   wall and column splitting.
+</remarks>
+            <returns>
+   The collection of level information.
+</returns>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetLevelInfo(Autodesk.Revit.DB.ElementId)">
+            <summary>
+   Returns an object representing the information about a level in the document.
+</summary>
+            <remarks>
+   Level information is currently automatically collected and cached in the ExporterIFC
+   object.  This method returns the cached information for a given level,
+   which is often needed during export of particular building elements which reference levels, as well
+   as to implement automatic wall and column splitting.
+</remarks>
+            <param name="levelId">
+   The level id.
+</param>
+            <returns>
+   The level information.
+</returns>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetHostObjects">
+            <summary>
+   Returns a collection containing the host object handles in the document.
+</summary>
+            <remarks>
+   Host object handles is currently collected by RegisterSpaceBoundingElementHandle
+   and exporting internal element and cached in the ExporterIFC object.
+   This method returns the cached information which is needed to create wall connectivity objects.
+</remarks>
+            <returns>
+   The collection of host objects.
+</returns>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.FindSpaceBoundingElementHandle(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.ElementId)">
+            <summary>
+   Looks up the handle associated to the element and level id from the ExporterIFC's internal cache.
+</summary>
+            <param name="id">
+   The Revit element id to look for.
+</param>
+            <param name="levelId">
+   The element level id.
+</param>
+            <returns>
+   The handle associated to the element and level id.  If the id is not found in the cache, an empty handle
+   is returned (HasValue == false).
+</returns>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.RegisterSpaceBoundingElementHandle(Autodesk.Revit.DB.IFC.IFCAnyHandle,Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.ElementId)">
+            <summary>
+   Stores a handle representing a space bounding element to the ExporterIFC's internal cache.
+</summary>
+            <remarks>
+   The cache of space bounding elements will be used during completion of export to create
+   relationship objects such as IfcRelSpaceBoundary and IfcRelConnectsPathElements.
+   The types of Revit elements accepted by this function are:
+   <list type="bullet"><item>Walls</item><item>Curtain walls</item><item>Roofs</item><item>Floors</item><item>Doors</item><item>Windows</item></list></remarks>
+            <param name="instanceHandle">
+   The handle to the space bounding element.
+</param>
+            <param name="id">
+   The Revit element id associated to this handle.
+</param>
+            <param name="levelId">
+   The level id assigned to the space bounding object.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetOptions">
+            <summary>
+   Gets the collection of named options set by the exporter client.
+</summary>
+            <returns>
+   The collection of named options.
+</returns>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.SetOwnerHistoryHandle(Autodesk.Revit.DB.IFC.IFCAnyHandle)">
+            <summary>
+   Sets the handle to the IfcOwnerHistory for the file.
+</summary>
+            <param name="ownerHistory">
+   The handle.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.SetFile(Autodesk.Revit.DB.IFC.IFCFile)">
+            <summary>
+   Sets the handle to the IFC file being created during this export operation.
+</summary>
+            <param name="file">
+   The handle to the file.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.PopTransform">
+            <summary>
+   Resets the internal transform of the exporter to process the previously active input element (if any), or
+   the default transform if the stack is empty.
+</summary>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.PushTransform(Autodesk.Revit.DB.Transform)">
+            <summary>
+   Sets the internal transform of the exporter to process the geometry and properties of the input element.
+</summary>
+            <param name="trf">
+   The transform.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.ExporterIFC.GetFile">
+            <summary>
+   Gets the handle to the IFC file being created during this export operation.
+</summary>
+            <returns>
+   The handle to the file.
+</returns>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.IsValidObject">
+            <summary>
+   Specifies whether the .NET object represents a valid Revit entity.
+</summary>
+            <remarks>
+   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
+   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
+</remarks>
+            <returns>
+   True if the API object holds a valid Revit native object, false otherwise.
+</returns>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.WallAndColumnSplitting">
+            <summary>
+   Identifies if division of multi-level walls and columns by levels should take place during this export.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.SpaceBoundaryLevel">
+            <summary>
+   Identifies the level of space boundaries being exported.
+</summary>
+            <remarks>
+   There are three valid values for this integer:
+   0 = export no space boundaries.  This can save space if the receiving application doesn't use them.
+   1 = export 1st level space boundaries.  This is the default.
+   2 = export 2nd level space boundaries.  This is primarily for use in energy analysis programs, and the GSA.
+</remarks>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.ExportBaseQuantities">
+            <summary>
+   Identifies if the export should include IFC standard quantities currently supported by Revit.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.FileVersion">
+            <summary>
+   Identifies the file version being exported.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.ExportAs2x3">
+            <summary>
+   Identifies if the file version being exported is 2x3.
+</summary>
+            <remarks>
+   Returns true even for alternative formats equivalent to 2x3, such as COBIE.
+</remarks>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.ExportAs2x2">
+            <summary>
+   Identifies if the file version being exported is 2x2.
+</summary>
+            <remarks>
+   Returns true even for alternative formats equivalent to 2x2, such as BCA.
+</remarks>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.ExporterIFC.FileName">
+            <summary>
+   The name of the IFC file being exported.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.ExporterIFC">
+            <summary>
+   The main class provided by Revit to allow implementation of IFC export.
+</summary>
+            <remarks>
+   An instance of this class is provided to clients which implement IExporterIFC
+   in order to provide an implementation for IFC export.  It contains information
+   on the options selected by the user for the export operation, as well as
+   members used to access specific types of data needed to implement the export
+   properly.
+</remarks>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCConnectedWallData.IsValidObject">
+            <summary>
+   Specifies whether the .NET object represents a valid Revit entity.
+</summary>
+            <remarks>
+   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
+   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
+</remarks>
+            <returns>
+   True if the API object holds a valid Revit native object, false otherwise.
+</returns>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCConnectedWallData.Location">
+            <summary>
+   The location for the join.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCConnectedWallData.ElementId">
+            <summary>
+   The element id to which this element is joined.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IFCConnectedWallData">
+            <summary>
+   A class that contains the IFC-specific information about how an element is joined to another element.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.GetLocalPlacement">
+            <summary>
+   Gets the local placement.
+</summary>
+            <returns>
+   The local placement.
+</returns>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.GetRelatedElements">
+            <summary>
+   Gets all building elements on this level.
+</summary>
+            <returns>
+   The collection of elements.
+</returns>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.GetRelatedProducts">
+            <summary>
+   Gets all building products on this level.
+</summary>
+            <returns>
+   The collection of products.
+</returns>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.GetBuildingStorey">
+            <summary>
+   Gets the IfcBuildingStorey handle.
+</summary>
+            <returns>
+   The handle.
+</returns>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCLevelInfo.Create(Autodesk.Revit.DB.IFC.IFCAnyHandle,Autodesk.Revit.DB.IFC.IFCAnyHandle,System.Double,System.Double,System.Double,System.Boolean)">
+            <summary>
+   Creates an IFCLevelInfo.
+</summary>
+            <param name="buildingStorey">
+   The building storey handle (IfcBuildingStorey).
+</param>
+            <param name="localPlacement">
+   The local placement handle (IfcLocalPlacement).
+</param>
+            <param name="height">
+   The height of the level.
+</param>
+            <param name="elevation">
+   The elevation of the level.
+</param>
+            <param name="scaleFactor">
+   The scale factor.
+</param>
+            <param name="isPrimaryLevel">
+   True if this is primary level, false otherwise.
+</param>
+            <returns>
+   The IFCLevelInfo object.
+</returns>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCLevelInfo.IsValidObject">
+            <summary>
+   Specifies whether the .NET object represents a valid Revit entity.
+</summary>
+            <remarks>
+   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
+   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
+</remarks>
+            <returns>
+   True if the API object holds a valid Revit native object, false otherwise.
+</returns>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCLevelInfo.Elevation">
+            <summary>
+   The elevation of the level.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCLevelInfo.DistanceToNextLevel">
+            <summary>
+   The distance to the next story level.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IFCLevelInfo">
+            <summary>
+   Represents information about a particular level in the document.
+</summary>
+            <remarks>
+   Level information includes the height, which is the distance to from this level
+   to the next available level, and the actual elevation of the level, in the Revit default units.
+</remarks>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ClearOpenings">
+            <summary>
+   Removes all cached openings from the data.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.AddOpening(Autodesk.Revit.DB.IFC.IFCExtrusionData)">
+            <summary>
+   Adds an opening to the data.
+</summary>
+            <remarks>
+   The opening is stored for retrieval later via GetOpenings().
+</remarks>
+            <param name="data">
+   The opening.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.GetOpenings">
+            <summary>
+   Gets a collection of all of the openings stored in this data.
+</summary>
+            <remarks>
+   Contains all of the openings stored via AddOpening().
+</remarks>
+            <returns>
+   The opening information.
+</returns>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.GetLocalPlacement">
+            <summary>
+   Gets the reference to the IfcLocalPlacement handle used when creating the extrusion.
+</summary>
+            <returns>
+   The IfcLocalPlacement handle.
+</returns>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.SetLocalPlacement(Autodesk.Revit.DB.IFC.IFCAnyHandle)">
+            <summary>
+   Sets the data to reference an IfcLocalPlacement handle when creating the extrusion.
+   Side effect: will set ReuseLocalPlacement to true.
+</summary>
+            <param name="localPlacement">
+   The IfcLocalPlacement handle.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.IsValidObject">
+            <summary>
+   Specifies whether the .NET object represents a valid Revit entity.
+</summary>
+            <remarks>
+   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
+   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
+</remarks>
+            <returns>
+   True if the API object holds a valid Revit native object, false otherwise.
+</returns>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.AreInnerRegionsOpenings">
+            <summary>
+   True if inner regions of the extrusion should become openings, false otherwise.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ExtrusionDirection">
+            <summary>
+   The extrusion direction to generate an extrusion.
+</summary>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   When setting this property: A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.CustomAxis">
+            <summary>
+   The custom extrusion axis to try when generating an extrusion.
+</summary>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   When setting this property: A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.HasExtrusionDirection">
+            <summary>
+   Identifies if the data contains a extrusion direction.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.HasCustomAxis">
+            <summary>
+   Identifies if the data contains a custom extrusion axis.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.PossibleExtrusionAxes">
+            <summary>
+   The axes to try when generating the properties of the extrusion.
+</summary>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentOutOfRangeException">
+   When setting this property: A value passed for an enumeration argument is not a member of that enumeration
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ReuseLocalPlacement">
+            <summary>
+   Allows re-use of local placement when creating a new local placement
+   due to shifting of breps when moving towards the origin.
+</summary>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.AllowVerticalOffsetOfBReps">
+            <summary>
+   Allows vertical shifting of breps when moving towards the origin.
+</summary>
+            <since>
+   2013
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledOuterPerimeter">
+            <summary>
+   The outer perimeter of the extrusion, scaled to the units of export.
+</summary>
+            <value>
+   This value represents the perimeter of the outermost curve loop bounding the area of the extrusion.
+   Zero if the perimeter has never been set on this object.
+</value>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledInnerPerimeter">
+            <summary>
+   The inner perimeter of the extrusion, scaled to the units of export.
+</summary>
+            <value>
+   This value represents the perimeter of all of the inner curve loops within the area of the extrusion.
+   Zero if the perimeter has never been set on this object.
+</value>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledWidth">
+            <summary>
+   The width of the extrusion, scaled to the units of export.
+</summary>
+            <value>
+   Zero if the width has never been set on this object.
+</value>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.Slope">
+            <summary>
+   The slope of the extrusion, in degrees.
+</summary>
+            <value>
+   Zero if the slope has never been set on this object.
+</value>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledLength">
+            <summary>
+   The length of the extrusion, scaled to the units of export.
+</summary>
+            <value>
+   Zero if the length has never been set on this object.
+</value>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledHeight">
+            <summary>
+   The height of the extrusion, scaled to the units of export.
+</summary>
+            <value>
+   Zero if the height has never been set on this object.
+</value>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ScaledArea">
+            <summary>
+   The area of the extrusion, scaled to the units of export.
+</summary>
+            <value>
+   The value will be 0.0 if the area has never been set on this object.
+</value>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.ForceOffset">
+            <summary>
+   True to create new local placement with identity transform.
+</summary>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData.#ctor">
+            <summary>
+   The default constructor.
+</summary>
+            <remarks>
+   All input data will be considered uninitialized.
+</remarks>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionCreationData">
+            <summary>
+   A utility object that is used to pass information related to extrusion creation.
+</summary>
+            <remarks>
+   This class accepts input used to attempt to create an extrusion (possibly with openings) from Revit geometry.
+   The output contains information about the created extrusion and its openings. The information set is used to
+   generate properties for the extruded body and related opening elements in the IFC file.
+</remarks>
+            <since>
+   2012
+</since>
+        </member>
         <member name="M:Autodesk.Revit.DB.IFC.IFCTransaction.RollBack">
             <summary>
    Rolls back all changes made to the IFC file during the transaction.
@@ -11575,6 +11241,340 @@ A path to a Revit model stored on a Revit server.
         <member name="M:FilePath.#ctor">
             <summary>
 A path to a Revit model stored on disk.
+</summary>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorUtils.CalculateExtrusionData(Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions,System.Collections.Generic.IList`1{Autodesk.Revit.DB.Face})">
+            <summary>
+   Calculates the extrusion data from a collection of Revit geometry faces.
+</summary>
+            <param name="extrInfo">
+   The options for extrusion extraction.
+</param>
+            <param name="allInputFaces">
+   The collection of faces.
+</param>
+            <returns>
+   A collection of extrusion data calculated for the geometry.
+   If the function fails to calculate one or more valid extrusions,
+   this collection will be empty.
+</returns>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorUtils.CalculateExtrusionData(Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions,Autodesk.Revit.DB.GeometryObject)">
+            <summary>
+   Calculates the extrusion data from a Revit geometry object.
+</summary>
+            <param name="extrusionOptions">
+   The options for extrusion extraction.
+</param>
+            <param name="geometryObject">
+   The geometry object.
+</param>
+            <returns>
+   A collection of extrusion data calculated for the geometry.
+   If the function fails to calculate one or more valid extrusions,
+   this collection will be empty.
+</returns>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorUtils">
+            <summary>
+   A utility class used to calculate extrusion data from Revit geometry for IFC export.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.IsValidObject">
+            <summary>
+   Specifies whether the .NET object represents a valid Revit entity.
+</summary>
+            <remarks>
+   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
+   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
+</remarks>
+            <returns>
+   True if the API object holds a valid Revit native object, false otherwise.
+</returns>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.Scale">
+            <summary>
+   The scaling factor for length measurements from the default Revit units to the export units.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.CustomAxis">
+            <summary>
+   The custom axis to try (if extrusionAxes includes an option for a custom direction).
+</summary>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   When setting this property: A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.ExtrusionAxes">
+            <summary>
+   The extrusion axes to try when doing the calculation.
+</summary>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentOutOfRangeException">
+   When setting this property: A value passed for an enumeration argument is not a member of that enumeration
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions.#ctor(Autodesk.Revit.DB.IFC.ExporterIFC,Autodesk.Revit.DB.IFC.IFCExtrusionAxes,Autodesk.Revit.DB.XYZ,System.Double)">
+            <summary>
+   Constructs a new instance of a class used to calculate extrusions from Revit geometry.
+</summary>
+            <param name="exporterIFC">
+   The exporter.
+</param>
+            <param name="extrusionAxes">
+   The extrusion axes to try when doing the calculation.
+</param>
+            <param name="customAxis">
+   The custom axis to try (if extrusionAxes includes an option for a custom direction).
+</param>
+            <param name="scale">
+   The scaling factor for length measurements from the default Revit units to the export units.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentOutOfRangeException">
+   A value passed for an enumeration argument is not a member of that enumeration
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionCalculatorOptions">
+            <summary>
+   This class contains the options used to calculate extrusions from Revit geometry.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.GetLoops">
+            <summary>
+   Gets the curve loops that form the base shape of the extrusion.
+</summary>
+            <returns>
+   The collection of loops.
+</returns>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.ClearLoops">
+            <summary>
+   Clears the curve loops stored in the extrusion data.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.RemoveLoopAt(System.Int32)">
+            <summary>
+   Removes the loop at the specified index.
+</summary>
+            <param name="index">
+   The zero-based index of the loop to remove.
+</param>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.AddLoop(Autodesk.Revit.DB.CurveLoop)">
+            <summary>
+   Adds a curve loop to the extrusion data.
+</summary>
+            <param name="pLoop">
+   The curve loop.
+</param>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.IsValid">
+            <summary>
+   Determines if the extrusion data represents a valid extrusion.
+</summary>
+            <returns>
+   True if the extrusion is valid, false otherwise.
+</returns>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionData.IsValidObject">
+            <summary>
+   Specifies whether the .NET object represents a valid Revit entity.
+</summary>
+            <remarks>
+   If the corresponding Revit native object is destroyed, or creation of the corresponding object is undone,
+   a managed API object containing it is no longer valid. API methods cannot be called on invalidated wrapper objects.
+</remarks>
+            <returns>
+   True if the API object holds a valid Revit native object, false otherwise.
+</returns>
+            <since>
+   2014
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionData.ExtrusionDirection">
+            <summary>
+   The direction used for the extrusion.
+</summary>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentNullException">
+   When setting this property: A non-optional argument was NULL
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionData.ExtrusionBasis">
+            <summary>
+   The basis used for the extrusion.
+</summary>
+            <exception cref="T:Autodesk.Revit.Exceptions.ArgumentOutOfRangeException">
+   When setting this property: A value passed for an enumeration argument is not a member of that enumeration
+</exception>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="P:Autodesk.Revit.DB.IFC.IFCExtrusionData.ScaledExtrusionLength">
+            <summary>
+   The length of the extrusion, scaled in the units of the export.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="M:Autodesk.Revit.DB.IFC.IFCExtrusionData.#ctor">
+            <summary>
+   Constructs a new empty extrusion data object.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionData">
+            <summary>
+   Represents the geometry of an extrusion (a solid body or opening) generated
+   from Revit geometry.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionBasis">
+            <summary>
+   This enumerated type represents the possible bases for derivation of extrusion geometry.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionBasis.BasisZ">
+            <summary>
+   The Z direction.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionBasis.BasisY">
+            <summary>
+   The Y direction.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionBasis.BasisX">
+            <summary>
+   The X direction.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionBasis.InvalidBasis">
+            <summary>
+   An invalid basis (typically indicating that the extrusion extraction was unsuccessful).
+</summary>
+        </member>
+        <member name="T:Autodesk.Revit.DB.IFC.IFCExtrusionAxes">
+            <summary>
+   Represents the possible axes to try when generating an extrusion using IFCCreateExtrusionData.
+</summary>
+            <since>
+   2012
+</since>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryXYZAndCustom">
+            <summary>
+   The x-, y-, and z-axes, and a custom direction.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryCustom">
+            <summary>
+   A custom direction.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryXYZ">
+            <summary>
+   The x-, y-, and z-axes.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryYZ">
+            <summary>
+   The y- and z-axes.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryXZ">
+            <summary>
+   The x- and z-axes.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryZ">
+            <summary>
+   The z-axis.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryXY">
+            <summary>
+   The x- and y-axes.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryY">
+            <summary>
+   The y-axis.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryX">
+            <summary>
+   The x-axis.
+</summary>
+        </member>
+        <member name="F:Autodesk.Revit.DB.IFC.IFCExtrusionAxes.TryDefault">
+            <summary>
+   The default value.
 </summary>
         </member>
         <member name="P:Autodesk.Revit.DB.IFC.IFCAggregate.Item(System.Int32)">
