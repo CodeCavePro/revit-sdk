@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -10,14 +11,18 @@
     <Version>$(Version)</Version>
     <Authors>Zhmayev Yaroslav</Authors>
     <Company>CodeCave LLC</Company>
-    <PackageTags>revit sdk api autodesk revitapi revitsdk $(RevitVersion)</PackageTags>
+    <PackageTags>revit, sdk, api, sdk, autodesk, revitapi, revitsdk, C#, addin, plugin, command, external application, applicaion, $(RevitVersion), revit$(RevitVersion)</PackageTags>
     <Description>The Software Development Toolkit (SDK) provides extensive .NET code samples and documentation to help you get started developing with the Revit API.</Description>
     <Copyright>© Autodesk Inc. All rights reserved</Copyright>
-    <PackageIconUrl>https://raw.githubusercontent.com/CodeCavePro/RevitSDK/master/assets/Revit-2014.png</PackageIconUrl>
     <PackageProjectUrl>https://www.autodesk.com/developer-network/platform-technologies/revit</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CodeCavePro/RevitSDK</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageIcon>Revit.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -32,14 +37,15 @@
     <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-  </PropertyGroup>
-
   <ItemGroup>
     <Content Include="../lib/$(RevitVersion)/*" Pack="true" PackagePath="lib\$(TargetPath)" />
     <Content Include="../assets/LICENSE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="../assets/Revit-2014.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2014'" />
+    <Content Include="../assets/Revit-2015.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2015'" />
+    <Content Include="../assets/Revit-2017.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' != '2014' And '$(RevitVersion)' != '2015'" />
   </ItemGroup>
 
   <!--
