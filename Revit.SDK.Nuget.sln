@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revit.SDK.2020", "src\Revit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revit.SDK.2021", "src\Revit.SDK.2021.csproj", "{15B47447-5BAB-494C-B879-68B7624F3B39}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revit.SDK.2022", "src\Revit.SDK.2022.csproj", "{78BE52B6-A551-4282-B8C1-2A742FEB0A95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{15B47447-5BAB-494C-B879-68B7624F3B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15B47447-5BAB-494C-B879-68B7624F3B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15B47447-5BAB-494C-B879-68B7624F3B39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BE52B6-A551-4282-B8C1-2A742FEB0A95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BE52B6-A551-4282-B8C1-2A742FEB0A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BE52B6-A551-4282-B8C1-2A742FEB0A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BE52B6-A551-4282-B8C1-2A742FEB0A95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
