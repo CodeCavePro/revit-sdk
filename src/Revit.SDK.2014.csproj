@@ -7,10 +7,11 @@
     Initial Shipping - April 17th 2013 - Build: 20130308_1515
     -->
     <RevitVersion>2014</RevitVersion>
-    <Version>$(RevitVersion).0.1</Version>
+    <Version>$(RevitVersion).0.1.2000</Version>
+    <FileVersion>$(RevitVersion).0.1</FileVersion>
+    <AssemblyVersion>$(RevitVersion).0.1</AssemblyVersion>
     <TargetPath>net40</TargetPath>
   </PropertyGroup>
 
-  <Import Project="Revit.SDK.Nuget.csproj">
-  </Import>
+  <Import Project="Revit.SDK.Nuget.csproj" />
 </Project>

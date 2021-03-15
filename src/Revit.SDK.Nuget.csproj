@@ -38,7 +38,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="../lib/$(RevitVersion)/*" Pack="true" PackagePath="lib\$(TargetPath)" />
+    <Content Include="../lib/$(RevitVersion)/*" Pack="true" PackagePath="ref/$(TargetPath)" />
     <Content Include="../assets/LICENSE.txt" Pack="true" PackagePath="" />
   </ItemGroup>
 
