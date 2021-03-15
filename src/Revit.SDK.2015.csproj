@@ -4,7 +4,7 @@
     https://knowledge.autodesk.com/support/revit-products/downloads/caas/downloads/content/autodesk-revit-2015-product-updates.html
     -->
     <RevitVersion>2015</RevitVersion>
-    <Version>$(RevitVersion).0.1148.2000</Version>
+    <Version>$(RevitVersion).0.1148.2001</Version>
     <FileVersion>$(RevitVersion).0.1148</FileVersion>
     <AssemblyVersion>$(RevitVersion).0.1148</AssemblyVersion>
     <TargetPath>net45</TargetPath>
