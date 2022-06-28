@@ -45,7 +45,8 @@
   <ItemGroup>
     <Content Include="../assets/Revit-2014.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2014'" />
     <Content Include="../assets/Revit-2015.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2015'" />
-    <Content Include="../assets/Revit-2017.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' != '2014' And '$(RevitVersion)' != '2015'" />
+    <Content Include="../assets/Revit-2017.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' != '2014' And '$(RevitVersion)' != '2015' And '$(RevitVersion)' != '2023'" />
+    <Content Include="../assets/Revit-2023.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2023'" />
   </ItemGroup>
 
   <!--
