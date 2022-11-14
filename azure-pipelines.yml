@@ -25,14 +25,14 @@ steps:
   displayName: 'Build the solution'
   inputs:
     command: 'build'
-    projects: '*.sln'
+    projects: '**/*.sln'
     arguments: '--configuration Debug'
 
 - task: DotNetCoreCLI@2
   displayName: 'Testing the solution'
   inputs:
     command: 'test'
-    projects: '*.sln'
+    projects: '**/*.sln'
     arguments: '--configuration Debug'
 
 - task: DotNetCoreCLI@2
