@@ -63,11 +63,11 @@ steps:
     versionSource: 'gitversion'
     doInstallGitVersion: true
     GitVersionInstallerSource: 'custom'
-    GitVersionInstallerUrl: 'https://packages.chocolatey.org/GitVersion.Portable.5.0.1.nupkg'
+    GitVersionInstallerUrl: 'https://packages.chocolatey.org/GitVersion.Portable.5.11.1.nupkg'
     doUseLatestGitVersionInstallerVersion: false
     versionFormat: 'fourParts'
     paramAssemblyVersion: '4'
-    paramAssemblyFileVersion: '4'
+    paramAssemblyFileVersion: '4' 
     paramAssemblyInformationalVersion: '4'
     paramVersionCode: '2'
     buildNumberVersionFormat: '3'
