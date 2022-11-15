@@ -6,7 +6,6 @@
     Update Release 1 - Build 20130709_2115 (July 2013) Blog post at Revit Clinic which links to multiple version's update files
     Initial Shipping - April 17th 2013 - Build: 20130308_1515
     -->
-
     <RevitVersion>2014</RevitVersion>
     <Version>$(RevitVersion).0.1.2001</Version>
     <FileVersion>$(RevitVersion).0.1</FileVersion>
