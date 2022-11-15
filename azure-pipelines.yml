@@ -26,7 +26,7 @@ steps:
   inputs:
     command: "build"
     arguments: '--configuration Debug'
-    projects: '**/*.sln'
+    projects: '*.sln'
 
 - task: DotNetCoreCLI@2
   displayName: 'Testing the solution'
