@@ -22,20 +22,6 @@ steps:
     version: '6.0.x'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Building the project'
-  inputs:
-    command: "build"
-    arguments: '--configuration Debug'
-    projects: '*.sln'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Testing the solution'
-  inputs:
-    command: 'test'
-    projects: '*.sln'
-    arguments: '--configuration Debug'
-
-- task: DotNetCoreCLI@2
   displayName: 'Creating NuGet package (with debug symbols)'
   condition: and(succeeded(), not(eq(variables['Build.Reason'], 'PullRequest')))
   inputs:
