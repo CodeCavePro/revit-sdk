@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
-  <PropertyGroup>
-    <!--
+	<PropertyGroup>
+		<!--
     https://knowledge.autodesk.com/support/revit-products/downloads/caas/downloads/content/autodesk-revit-2018-product-updates.html
     -->
-    <RevitVersion>2018</RevitVersion>
-    <Version>$(RevitVersion).2.0.2001</Version>
-    <FileVersion>$(RevitVersion).2.0</FileVersion>
-    <AssemblyVersion>$(RevitVersion).2.0</AssemblyVersion>
-    <TargetPath>net46</TargetPath>
-  </PropertyGroup>
+		<RevitVersion>2018</RevitVersion>
+		<Version>$(RevitVersion).2.0.2001</Version>
+		<FileVersion>$(RevitVersion).2.0</FileVersion>
+		<AssemblyVersion>$(RevitVersion).2.0</AssemblyVersion>
+		<TargetPath>net46</TargetPath>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
 
-  <Import Project="Revit.SDK.Nuget.csproj" />
+	<Import Project="Revit.SDK.Nuget.csproj" />
 </Project>

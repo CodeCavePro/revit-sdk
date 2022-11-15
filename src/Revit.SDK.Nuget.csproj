@@ -1,64 +1,64 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <IsPackable>true</IsPackable>
-	<IncludeSymbols>true</IncludeSymbols>
-	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<IsPackable Condition="$(IsPackable) == ' '">false</IsPackable>
+		<IncludeSymbols>false</IncludeSymbols>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<NoPackageAnalysis>true</NoPackageAnalysis>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <PackageId>Autodesk.Revit.SDK</PackageId>
-    <Version>$(Version)</Version>
-    <Authors>Zhmayev Yaroslav</Authors>
-    <Company>CodeCave LLC</Company>
-    <PackageTags>revit, sdk, api, sdk, autodesk, revitapi, revitsdk, C#, addin, plugin, command, external application, applicaion, $(RevitVersion), revit$(RevitVersion)</PackageTags>
-    <Description>The Software Development Toolkit (SDK) provides extensive .NET code samples and documentation to help you get started developing with the Revit API.</Description>
-    <Copyright>© Autodesk Inc. All rights reserved</Copyright>
-    <PackageProjectUrl>https://www.autodesk.com/developer-network/platform-technologies/revit</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/CodeCavePro/RevitSDK</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <NeutralLanguage>en</NeutralLanguage>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageIcon>Revit.png</PackageIcon>
-  </PropertyGroup>
+	<PropertyGroup>
+		<PackageId>Autodesk.Revit.SDK</PackageId>
+		<Version>$(Version)</Version>
+		<Authors>Zhmayev Yaroslav</Authors>
+		<Company>CodeCave LLC</Company>
+		<PackageTags>revit, sdk, api, sdk, autodesk, revitapi, revitsdk, C#, addin, plugin, command, external application, applicaion, $(RevitVersion), revit$(RevitVersion)</PackageTags>
+		<Description>The Software Development Toolkit (SDK) provides extensive .NET code samples and documentation to help you get started developing with the Revit API.</Description>
+		<Copyright>© Autodesk Inc. All rights reserved</Copyright>
+		<PackageProjectUrl>https://www.autodesk.com/developer-network/platform-technologies/revit</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/CodeCavePro/RevitSDK</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+	<PropertyGroup>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageIcon>Revit.png</PackageIcon>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <DebugType>none</DebugType>
-    <OutputPath>..\dist\</OutputPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<DebugType>none</DebugType>
+		<OutputPath>..\dist\</OutputPath>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <EnableDefaultItems>false</EnableDefaultItems>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
-  </PropertyGroup>
+	<PropertyGroup>
+		<EnableDefaultItems>false</EnableDefaultItems>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+		<EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="../lib/$(RevitVersion)/*" Pack="true" PackagePath="ref/$(TargetPath)" />
-    <Content Include="../assets/LICENSE.txt" Pack="true" PackagePath="" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="../lib/$(RevitVersion)/*" Pack="true" PackagePath="ref/$(TargetPath)" />
+		<Content Include="../assets/LICENSE.txt" Pack="true" PackagePath="" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="../assets/Revit-2014.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2014'" />
-    <Content Include="../assets/Revit-2015.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2015'" />
-    <Content Include="../assets/Revit-2017.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' != '2014' And '$(RevitVersion)' != '2015' And '$(RevitVersion)' != '2023'" />
-    <Content Include="../assets/Revit-2023.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2023'" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="../assets/Revit-2014.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2014'" />
+		<Content Include="../assets/Revit-2015.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2015'" />
+		<Content Include="../assets/Revit-2017.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' != '2014' And '$(RevitVersion)' != '2015' And '$(RevitVersion)' != '2023'" />
+		<Content Include="../assets/Revit-2023.png" Pack="true" PackagePath="Revit.png" Condition="'$(RevitVersion)' == '2023'" />
+	</ItemGroup>
 
-  <!--
+	<!--
     Disable the normal compilation process
   -->
-  <Target Name="CoreCompile" />
-  <PropertyGroup>
-    <BuildInParallel>false</BuildInParallel>
-    <SkipCopyBuildProduct>true</SkipCopyBuildProduct>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-  </PropertyGroup>
+	<Target Name="CoreCompile" />
+	<PropertyGroup>
+		<BuildInParallel>false</BuildInParallel>
+		<SkipCopyBuildProduct>true</SkipCopyBuildProduct>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+	</PropertyGroup>
 
 </Project>

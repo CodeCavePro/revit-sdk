@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
-  <PropertyGroup>
-    <!--
+	<PropertyGroup>
+		<!--
     Update Release 3 - (July 2014)
     Update Release 2 - Build 20131024_2115 (October 2013) Blog post at Revit OpEd which links to multiple version's update files
     Update Release 1 - Build 20130709_2115 (July 2013) Blog post at Revit Clinic which links to multiple version's update files
     Initial Shipping - April 17th 2013 - Build: 20130308_1515
     -->
-    <RevitVersion>2014</RevitVersion>
-    <Version>$(RevitVersion).0.1.2001</Version>
-    <FileVersion>$(RevitVersion).0.1</FileVersion>
-    <AssemblyVersion>$(RevitVersion).0.1</AssemblyVersion>
-    <TargetPath>net40</TargetPath>
-  </PropertyGroup>
+		<RevitVersion>2014</RevitVersion>
+		<Version>$(RevitVersion).0.1.2001</Version>
+		<FileVersion>$(RevitVersion).0.1</FileVersion>
+		<AssemblyVersion>$(RevitVersion).0.1</AssemblyVersion>
+		<TargetPath>net40</TargetPath>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
 
-  <Import Project="Revit.SDK.Nuget.csproj" />
+	<Import Project="Revit.SDK.Nuget.csproj" />
 </Project>

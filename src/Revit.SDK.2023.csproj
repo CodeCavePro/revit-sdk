@@ -6,6 +6,7 @@
 		<FileVersion>$(RevitVersion).0.0</FileVersion>
 		<AssemblyVersion>$(RevitVersion).0.0</AssemblyVersion>
 		<TargetPath>net48</TargetPath>
+		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
 	<Import Project="Revit.SDK.Nuget.csproj" />

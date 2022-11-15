@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
-  <PropertyGroup>
-    <RevitVersion>2020</RevitVersion>
-    <Version>$(RevitVersion).2.1.2001</Version>
-    <FileVersion>$(RevitVersion).2.1</FileVersion>
-    <AssemblyVersion>$(RevitVersion).2.1</AssemblyVersion>
-    <TargetPath>net471</TargetPath>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RevitVersion>2020</RevitVersion>
+		<Version>$(RevitVersion).2.1.2001</Version>
+		<FileVersion>$(RevitVersion).2.1</FileVersion>
+		<AssemblyVersion>$(RevitVersion).2.1</AssemblyVersion>
+		<TargetPath>net471</TargetPath>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
 
-  <Import Project="Revit.SDK.Nuget.csproj" />
+	<Import Project="Revit.SDK.Nuget.csproj" />
 </Project>
