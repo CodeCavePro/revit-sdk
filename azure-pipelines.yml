@@ -45,6 +45,6 @@ steps:
   condition: and(succeeded(), not(eq(variables['Build.Reason'], 'PullRequest')))
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/IFSE Parameter tool_setup/*.snupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.snupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGet'
