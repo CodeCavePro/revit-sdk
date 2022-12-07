@@ -48,3 +48,4 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.snupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGet'
+
