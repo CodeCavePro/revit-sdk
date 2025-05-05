@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
+
+	<PropertyGroup>
+		<RevitVersion>2026</RevitVersion>
+		<Version>$(RevitVersion).0.0.9999</Version>
+		<FileVersion>$(RevitVersion).0.0</FileVersion>
+		<AssemblyVersion>$(RevitVersion).0.0</AssemblyVersion>
+		<TargetPath>net8.0</TargetPath>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+
+	<Import Project="Revit.SDK.Nuget.csproj" />
+</Project>
